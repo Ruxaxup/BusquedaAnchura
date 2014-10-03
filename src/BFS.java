@@ -19,20 +19,24 @@ public class BFS {
 		//Metemos el nodo raiz a la lista
 		pendientes.add(G.getRoot());
 		while(!pendientes.isEmpty()){
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    MainFrame.out.setText(pendientes.toString());
-                    System.out.println(pendientes);
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            MainFrame.out.append("\n===============================\n");
+            MainFrame.out.append("Cola: "+pendientes.toString());
+            MainFrame.out.append("\nVisitados: "+visitados.toString());
+            System.out.println(pendientes);
 			Nodo V = pendientes.poll();
-			System.out.println("Analizando: "+V);
+			MainFrame.out.append("\nNodo Actual: "+V);
 			if(!visitados.contains(V) && esIgual(V,c)){
+				System.out.println(contador);
 				return true;
 			}else{
 				visitados.add(V);
 				List<Nodo> adyacentes = V.getAdyacentes();
+				MainFrame.out.append("\nHijos de "+V+": "+adyacentes.toString());
 				for (Nodo nodo : adyacentes) {
 					if(!visitados.contains(nodo))
 						pendientes.add(nodo);
@@ -40,10 +44,12 @@ public class BFS {
 			}
 			
 		}
+		System.out.println(contador);
 		return false;
 	}
-	
+	int contador = 0;
 	public boolean esIgual(Nodo n, char c){
+		contador++;
 		return n.getC()==c;
 	}
 	
