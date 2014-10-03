@@ -3,8 +3,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class BFS {
@@ -13,38 +11,40 @@ public class BFS {
 		this.G = G;
 	}
 	
+        
+        
 	public boolean buscar(char c){
 		Queue<Nodo> pendientes = new LinkedList<>();
 		Set<Nodo> visitados = new HashSet<>();
 		//Metemos el nodo raiz a la lista
 		pendientes.add(G.getRoot());
-		while(!pendientes.isEmpty()){
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            MainFrame.out.append("\n===============================\n");
+                /*El ciclo se repite hasta que se hayan visitado todos los nodos
+                  o se haya encontrado el elemento*/
+		while(!pendientes.isEmpty()){            
             MainFrame.out.append("Cola: "+pendientes.toString());
-            MainFrame.out.append("\nVisitados: "+visitados.toString());
-            System.out.println(pendientes);
-			Nodo V = pendientes.poll();
-			MainFrame.out.append("\nNodo Actual: "+V);
-			if(!visitados.contains(V) && esIgual(V,c)){
-				System.out.println(contador);
+            MainFrame.out.append("\nVisitados: "+visitados.toString());            
+            //Sacamos el elemento de la cabeza de la Cola
+            Nodo V = pendientes.poll();
+			MainFrame.out.append("\nNodo Actual: "+V);                        	
+                        if(esIgual(V,c)){		
+                            //Si es el elemento, cerramos la busqueda
+                            MainFrame.out.append("\n===============================\n");
 				return true;
 			}else{
+                                //Agregamos el nodo al conjunto de nodos visitados
 				visitados.add(V);
+                                //Obtenemos todos los nodos vecinos del nodo actual
 				List<Nodo> adyacentes = V.getAdyacentes();
-				MainFrame.out.append("\nHijos de "+V+": "+adyacentes.toString());
+				MainFrame.out.append("\nVecinos de "+V+": "+adyacentes.toString());
 				for (Nodo nodo : adyacentes) {
+                                    //Agregamos los vecinos a la Cola excepto 
+                                    //los que están en el conjunto de los visitados
 					if(!visitados.contains(nodo))
 						pendientes.add(nodo);
 				}
 			}
-			
-		}
-		System.out.println(contador);
+		    MainFrame.out.append("\n===============================\n");
+		}//Fin ciclo
 		return false;
 	}
 	int contador = 0;

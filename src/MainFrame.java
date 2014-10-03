@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -40,8 +39,8 @@ public class MainFrame extends JFrame implements ActionListener{
     private void initComponents() {
         //Colocacion y definicion de tamaño
         Dimension windowDimension = Toolkit.getDefaultToolkit().getScreenSize(); 
-        w_width = 300;
-        w_height = 200;
+        w_width = 400;
+        w_height = (int)(windowDimension.height * 0.9);
         setPreferredSize(new Dimension(w_width,w_height));
         setLocation((windowDimension.width / 2) - (w_width/2),
                     (windowDimension.height / 2) - (w_height/2));
@@ -62,8 +61,7 @@ public class MainFrame extends JFrame implements ActionListener{
         
         //--Panel Buscar
         JPanel panelBuscar = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        tfElement = new JTextField(5);
-        tfElement.setText("A");
+        tfElement = new JTextField(5);        
         tfElement.addKeyListener(new LimitadorCaracter(tfElement, 1));
         panelBuscar.add(new JLabel("Elemento a buscar:"));
         panelBuscar.add(tfElement);
@@ -132,20 +130,11 @@ public class MainFrame extends JFrame implements ActionListener{
             public void run() {
                 BFS bfs = new BFS(G);
                 char elementoABuscar = tfElement.getText().charAt(0);
+                elementoABuscar = Character.toUpperCase(elementoABuscar);
                 if(bfs.buscar(elementoABuscar)){
-                	out.append("\n**Se encontró: "+elementoABuscar);
-                    /*JOptionPane.showMessageDialog(null,
-                            "Si se encontro: "+elementoABuscar,
-                            "Yeiiiih",
-                            JOptionPane.INFORMATION_MESSAGE);*/
-                    System.out.println("Si se encontro: "+elementoABuscar);
-                }else{
-                        System.out.println("No se encontro: "+elementoABuscar);
-                        out.append("\n**No se encontró: "+elementoABuscar);
-                        /*JOptionPane.showMessageDialog(null,
-                            "No se encontro: "+elementoABuscar,
-                            "Yeiiiih",
-                            JOptionPane.INFORMATION_MESSAGE);*/
+                    out.append("-- Se encontró: "+elementoABuscar+" --");
+                }else{                        
+                        out.append("-- No se encontró: "+elementoABuscar+" --");
                 }
             }
             
