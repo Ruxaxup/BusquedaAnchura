@@ -1,8 +1,8 @@
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Set;
-import java.util.Vector;
 
 
 public class BFS {
@@ -24,7 +24,7 @@ public class BFS {
 				return true;
 			}else{
 				visitados.add(V);
-				Vector<Nodo> adyacentes = V.getAdyacentes();
+				List<Nodo> adyacentes = V.getAdyacentes();
 				for (Nodo nodo : adyacentes) {
 					if(!visitados.contains(nodo))
 						pendientes.add(nodo);

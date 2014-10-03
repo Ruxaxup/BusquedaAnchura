@@ -1,20 +1,21 @@
-import java.util.Vector;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Nodo {
 	private char c;
-	private Vector<Nodo> adyacentes;
+	private List<Nodo> adyacentes;
 	
 	public Nodo(char c){
 		this.c = c;
-		adyacentes = new Vector<>();
+		adyacentes = new LinkedList<>();
 	}
 	
 	public void addAdyacente(Nodo n){
 		adyacentes.add(n);
 	}
 	
-	public Vector<Nodo> getAdyacentes(){
+	public List<Nodo> getAdyacentes(){
 		return adyacentes;
 	}
 	
@@ -22,14 +23,6 @@ public class Nodo {
 		return c;
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-		if(obj instanceof Nodo){
-			Nodo n = (Nodo)obj;
-			return n.getC() == this.c; 
-		}
-		return false;
-	}
 	
 	@Override
 	public String toString() {
