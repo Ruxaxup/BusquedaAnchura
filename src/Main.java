@@ -1,8 +1,15 @@
 
+import javax.swing.JOptionPane;
+
+
 public class Main {
 	public static void main(String[] args) {
-		Grafo G = new Grafo();
-		
+		final Grafo G = new Grafo();
+		//Ventana
+                MainFrame mainFrame = new MainFrame();
+                mainFrame.setVisible(true);
+                
+                
 		//CREAMOS LOS NODOS
 		G.addNodo(new Nodo('A'));
 		G.addNodo(new Nodo('B'));
@@ -32,12 +39,29 @@ public class Main {
 		G.setRoot('A');
 		
 		//BFS (BUSQUEDA EN AMPLITUD)
-		BFS bfs = new BFS(G);
-		char elementoABuscar = 'J';
-		if(bfs.buscar('J')){
-			System.out.println("Si se encontro: "+elementoABuscar);
-		}else{
-			System.out.println("No se encontro");
-		}
+                Thread t = new Thread(new Runnable(){
+
+                    @Override
+                    public void run() {
+                        BFS bfs = new BFS(G);
+                        char elementoABuscar = 'J';
+                        if(bfs.buscar('J')){
+                            JOptionPane.showMessageDialog(null,
+                                    "Si se encontro: "+elementoABuscar,
+                                    "Yeiiiih",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            System.out.println("Si se encontro: "+elementoABuscar);
+                        }else{
+                                System.out.println("No se encontro: "+elementoABuscar);
+                                JOptionPane.showMessageDialog(null,
+                                    "No se encontro: "+elementoABuscar,
+                                    "Yeiiiih",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                    
+                });
+                t.start();
+		
 	}
 }

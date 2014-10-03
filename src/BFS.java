@@ -3,6 +3,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class BFS {
@@ -17,7 +19,13 @@ public class BFS {
 		//Metemos el nodo raiz a la lista
 		pendientes.add(G.getRoot());
 		while(!pendientes.isEmpty()){
-			System.out.println(pendientes);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(BFS.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    MainFrame.out.setText(pendientes.toString());
+                    System.out.println(pendientes);
 			Nodo V = pendientes.poll();
 			System.out.println("Analizando: "+V);
 			if(!visitados.contains(V) && esIgual(V,c)){
