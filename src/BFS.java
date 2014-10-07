@@ -24,7 +24,6 @@ public class BFS {
             MainFrame.out.append("\nVisitados: "+visitados.toString());            
             //Sacamos el elemento de la cabeza de la Cola
             Nodo V = pendientes.poll();
-            System.out.println(V+" ");
 			MainFrame.out.append("\nNodo Actual: "+V);                        	
             if(esIgual(V,c)){		
                 //Si es el elemento, cerramos la busqueda
@@ -33,6 +32,7 @@ public class BFS {
 			}else{
                 //Agregamos el nodo al conjunto de nodos visitados
 				visitados.add(V);
+				System.out.print(V+" ");
                 //Obtenemos todos los nodos vecinos del nodo actual
 				List<Nodo> adyacentes = V.getAdyacentes();
 				MainFrame.out.append("\nVecinos de "+V+": "+adyacentes.toString());
