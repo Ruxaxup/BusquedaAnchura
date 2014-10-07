@@ -1,3 +1,7 @@
+package GraphClasses;
+
+import TreeClasses.NodoArbol;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,7 +26,6 @@ public class Nodo {
 	public char getC(){
 		return c;
 	}
-	
 	
 	@Override
 	public String toString() {

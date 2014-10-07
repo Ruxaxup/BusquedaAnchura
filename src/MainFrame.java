@@ -1,3 +1,5 @@
+import GraphClasses.Grafo;
+import GraphClasses.Nodo;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -91,23 +93,33 @@ public class MainFrame extends JFrame implements ActionListener {
 	private void creaGrafo() {
 		G = new Grafo();
 		// CREAMOS LOS NODOS
-		G.addNodo(new Nodo('A'));
-		G.addNodo(new Nodo('B'));
-		G.addNodo(new Nodo('C'));
-		G.addNodo(new Nodo('D'));
-		G.addNodo(new Nodo('R'));
+		G.addNodo(new Nodo('a'));
+		G.addNodo(new Nodo('b'));
+		G.addNodo(new Nodo('c'));
+		G.addNodo(new Nodo('d'));
+		G.addNodo(new Nodo('e'));
+		G.addNodo(new Nodo('f'));
+		G.addNodo(new Nodo('g'));
+		G.addNodo(new Nodo('h'));
+                G.addNodo(new Nodo('i'));
 		
 
 		// CREAMOS LOS ENLACES
-		G.createEdge('R', 'A');
-		G.createEdge('R', 'B');
-		G.createEdge('A', 'B');
-		G.createEdge('A', 'C');
-		G.createEdge('B', 'C');
-		G.createEdge('C', 'D');
+		G.createEdge('a', 'b');
+		G.createEdge('a', 'c');
+		G.createEdge('b', 'e');
+		G.createEdge('c', 'd');
+                G.createEdge('c', 'e');
+		G.createEdge('e', 'f');
+                G.createEdge('e', 'g');
+                G.createEdge('f', 'g');
+		G.createEdge('g', 'h');
+                G.createEdge('g', 'i');
+                G.createEdge('h', 'i');
+                
 		
 		// ESTABLECEMOS EL NODO RAIZ
-		G.setRoot('R');
+		G.setRoot('a');
 		//G.setRoot('D');
 	}
 
@@ -119,9 +131,10 @@ public class MainFrame extends JFrame implements ActionListener {
 			public void run() {
 				BFS bfs = new BFS(G);
 				char elementoABuscar = tfElement.getText().charAt(0);
-				elementoABuscar = Character.toUpperCase(elementoABuscar);
+				//elementoABuscar = Character.toUpperCase(elementoABuscar);
 				if (bfs.buscar(elementoABuscar)) {
 					out.append("-- Se encontró: " + elementoABuscar + " --");
+                                    bfs.getArbol().printTree();
 				} else {
 					out.append("-- No se encontró: " + elementoABuscar + " --");
 				}
